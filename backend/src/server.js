@@ -13,13 +13,19 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173", // local dev
-      process.env.ALLOW_ORIGIN, // deployed frontend
-    ],
+    origin: true, // allow all origins temporarily for testing
     credentials: true,
   })
 );
+// app.use(
+//   cors({
+//     origin: [
+//       "http://localhost:5173", // local dev
+//       process.env.ALLOW_ORIGIN, // deployed frontend
+//     ],
+//     credentials: true,
+//   })
+// );
 
 app.use("/auth", userRouter);
 app.use("/api/notes", noteRoute);
