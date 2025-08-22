@@ -16,6 +16,7 @@ const Form = ({ userName, setUserName, password, setPassword, loading, onSubmit 
                     onChange={e => setUserName(e.target.value)}
                     className="outline-0 w-full p-2 text-sm sm:text-base"
                     placeholder="Username"
+                    required
                 />
             </div>
 
@@ -28,6 +29,7 @@ const Form = ({ userName, setUserName, password, setPassword, loading, onSubmit 
                     onChange={e => setPassword(e.target.value)}
                     className="outline-0 w-full p-2 text-sm sm:text-base"
                     placeholder="Password"
+                    required
                 />
             </div>
 

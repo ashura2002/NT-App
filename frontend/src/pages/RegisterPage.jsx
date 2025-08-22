@@ -15,9 +15,19 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
-    if (email.length <= 11) return toast.error('Email must 5 characters above')
-    if (userName.length < 6) return toast.error('Username must 6 character above')
-    if (password.length < 5) return toast.error("Password must 5 character above")
+    // validation rules
+    const validations = [
+      { condition: email.length <= 11, message: "Email must be 5 characters above" },
+      { condition: userName.length <= 6, message: "Username must be 6 characters above" },
+      { condition: password.length <= 5, message: "Password must be 5 characters above" }
+    ];
+
+    // check validation
+    const error = validations.find((validation) => validation.condition)
+    if (error) {
+      setLoading(false)
+      return toast.error(error.message)
+    }
 
     try {
       const res = await axiosInstance.post(`/auth/register`, {
@@ -63,6 +73,7 @@ const RegisterPage = () => {
             onChange={e => setEmail(e.target.value)}
             className='outline-0 w-full p-2 text-sm sm:text-base'
             placeholder='Email'
+            required
           />
         </div>
 
@@ -75,6 +86,7 @@ const RegisterPage = () => {
             onChange={e => setUserName(e.target.value)}
             className='outline-0 w-full p-2 text-sm sm:text-base'
             placeholder='Username'
+            required
           />
         </div>
 
@@ -87,6 +99,7 @@ const RegisterPage = () => {
             onChange={e => setPassword(e.target.value)}
             className='outline-0 w-full p-2 text-sm sm:text-base'
             placeholder='Password'
+            required
           />
         </div>
 
