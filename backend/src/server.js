@@ -14,11 +14,21 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173", // local dev
-      process.env.ALLOW_ORIGIN, // deployed frontend
-    ],
-    credentials: true,
+    origin: function (origin, callback) {
+      // allow requests with no origin (Postman, server-to-server)
+      if (!origin) return callback(null, true);
+
+      // normalize origin to remove trailing slash
+      const normalizedOrigin = origin.replace(/\/$/, "");
+
+      if (allowedOrigins.includes(normalizedOrigin)) {
+        callback(null, true);
+      } else {
+        console.error(`Blocked by CORS: ${origin}`);
+        callback(new Error(`CORS policy: Origin ${origin} not allowed`));
+      }
+    },
+    credentials: true, // allows cookies/auth headers
   })
 );
 
