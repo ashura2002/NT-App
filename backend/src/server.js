@@ -7,12 +7,16 @@ import noteRoute from "./routes/noteRoute.js";
 import ai_router from "./routes/askAiRoute.js";
 
 dotenv.config();
-const port = process.env.PORT;
+
 const app = express();
+const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.ALLOW_ORIGIN,
+    origin: [
+      "http://localhost:5173", // local dev
+      process.env.ALLOW_ORIGIN, // deployed frontend
+    ],
     credentials: true,
   })
 );
@@ -26,7 +30,3 @@ connect().then(() => {
     console.log(`server is running on port ${port}`);
   });
 });
-
-
-// deploy
-// push github

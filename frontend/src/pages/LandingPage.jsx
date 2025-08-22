@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { MoonIcon, SunDimIcon } from 'lucide-react'
 import themeContext from '../context/ThemeContext'
 
+
 const LandingPage = ({ isShow, setIsShow }) => {
     const { theme, setTheme } = useContext(themeContext)
     useEffect(() => {
@@ -71,7 +72,7 @@ const LandingPage = ({ isShow, setIsShow }) => {
                 transition={{ duration: 1, ease: 'easeInOut' }}
                 className='p-3 sm:p-5 w-[220px] sm:w-[300px] lg:w-[400px]'
             >
-                <img src={'/public/images/request.png'} alt="illustration" className='w-full object-contain' />
+                <img src='/images/request.png' alt="illustration" className='w-full object-contain' />  
             </motion.div>
         </div>
     )
