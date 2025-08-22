@@ -15,6 +15,10 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
+    if (email.length <= 11) return toast.error('Email must 5 characters above')
+    if (userName.length < 6) return toast.error('Username must 6 character above')
+    if (password.length < 5) return toast.error("Password must 5 character above")
+
     try {
       const res = await axiosInstance.post(`/auth/register`, {
         'username': userName,

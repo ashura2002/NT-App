@@ -29,7 +29,6 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   })
 );
-
 app.use("/auth", userRouter);
 app.use("/api/notes", noteRoute);
 app.use("/api", ai_router);
