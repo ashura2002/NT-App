@@ -2,11 +2,17 @@ import React from 'react'
 
 const NoData = () => {
   return (
-    <div className='p-2 w-full grid gap-5 place-items-center'>
-      <div className='w-[400px]'>
-        <img src={'/images/nodata.png'} alt="no data" className='w-full' />
+    <div className="p-4 w-full min-h-[50vh] flex flex-col items-center justify-center gap-4">
+      <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+        <img 
+          src={'/images/nodata.png'} 
+          alt="no data" 
+          className="w-full h-auto object-contain" 
+        />
       </div>
-      <h1 className='text-2xl '>No Notes Available</h1>
+      <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-center">
+        No Notes Available
+      </h1>
     </div>
   )
 }
