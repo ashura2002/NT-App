@@ -17,7 +17,7 @@ const RegisterPage = () => {
     setLoading(true)
     // validation rules
     const validations = [
-      { condition: email.length <= 11, message: "Email must be 5 characters above" },
+      { condition: email.length <= 11, message: "Email must be 11 characters above" },
       { condition: userName.length <= 6, message: "Username must be 6 characters above" },
       { condition: password.length <= 5, message: "Password must be 5 characters above" }
     ];
