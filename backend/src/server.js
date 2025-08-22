@@ -12,34 +12,12 @@ const app = express();
 const port = process.env.PORT || 5000;
 app.use(express.json());
 
-// Allowed origins
-const allowedOrigins = [
-  "http://localhost:5173", // local dev
-  process.env.ALLOW_ORIGIN?.replace(/\/$/, ""), // deployed frontend (no trailing slash)
-];
-
-// CORS middleware
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true); // allow Postman/server requests
-
-      const normalizedOrigin = origin.replace(/\/$/, "");
-      if (allowedOrigins.includes(normalizedOrigin)) {
-        callback(null, true);
-      } else {
-        console.error(`Blocked by CORS: ${origin}`);
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: true, // allow all origins pang testing
     credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
-// Handle preflight OPTIONS requests
-app.options("*", cors());
 
 app.use("/auth", userRouter);
 app.use("/api/notes", noteRoute);
