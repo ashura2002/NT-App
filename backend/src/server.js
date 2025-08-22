@@ -12,10 +12,21 @@ const app = express();
 const port = process.env.PORT || 5000;
 app.use(express.json());
 
+const allowOrigins = [process.env.ALLOW_ORIGIN, "http://localhost:5173"];
+
 app.use(
   cors({
-    origin: true, // allow all origins pang testing
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // allowing request with no origin like postman
+
+      if (allowOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   })
 );
 
